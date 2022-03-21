@@ -1,0 +1,42 @@
+<div class="card mx-auto" style="width: 25rem;">
+    <div class="card-header text-center">
+        Agregar Historia
+    </div>
+    <div class="card-body">
+        <form (ngSubmit)="onSubmit()" class="row g-3">
+            <div class="col-12">
+                <label for="documentInput" class="form-label">N° Documento del Paciente:</label>
+                <input type="text" class="form-control" id="documentInput" maxlength="8" name="documentNumber"
+                    [(ngModel)]="documentNumber">
+            </div>
+            <div class="col-md-6">
+                <label for="heightInput" class="form-label">Altura (cm):</label>
+                <input type="number" min="0" class="form-control" id="heightInput" name="height"
+                    [(ngModel)]="history.height">
+            </div>
+            <div class="col-md-6">
+                <label for="weightInput" class="form-label">Peso (kg):</label>
+                <input type="number" min="0" class="form-control" id="weightInput" name="weight"
+                    [(ngModel)]="history.weight">
+            </div>
+            <div class="col-md-6">
+                <label for="temperatureInput" class="form-label">Temperatura (C°):</label>
+                <input type="number" min="0" max="40" class="form-control" id="temperatureInput" name="temperature"
+                    [(ngModel)]="history.temperature">
+            </div>
+            <div class="col-md-6">
+                <label for="pressureInput" class="form-label">Presión (Pa):</label>
+                <input type="number" min="0" class="form-control" id="pressureInput" name="pressure"
+                    [(ngModel)]="history.pressure">
+            </div>
+            <div class="col-12">
+                <label for="anamnesisText" class="form-label">Anamnesis:</label>
+                <textarea class="form-control" id="anamnesisText" cols="30" rows="5" name="anamnesis"
+                    [(ngModel)]="history.anamnesis"></textarea>
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Agregar</button>
+            </div>
+        </form>
+    </div>
+</div>
