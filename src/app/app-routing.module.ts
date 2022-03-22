@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'pacientes', component: PatientsComponent },
   { path: 'historia', component: HistoryComponent },
   { path: 'antecedente', component: AntecedentComponent },
-  { path: 'paciente/document/:dni', component: PatientDetailComponent }
+  { path: 'paciente/:id', component: PatientDetailComponent }
 ];
 
 @NgModule({

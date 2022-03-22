@@ -1,3 +1,5 @@
+import { Location } from "./Location";
+
 export class Patient {
     _id: string;
     firstName: string;
@@ -5,6 +7,7 @@ export class Patient {
     documentNumber: string;
     birthdate: string;
     gender: string;
+    location: Location;
     department: string;
     province: string;
     district: string;
@@ -21,5 +24,6 @@ export class Patient {
         this.province = '';
         this.district = '';
         this.address = '';
+        this.location = new Location();
     }
 }

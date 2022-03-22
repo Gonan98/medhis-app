@@ -1,1 +1,189 @@
-<p>Detalles del paciente: {{documentNumber}}</p>
+<h3 class="text-center">Detalle de paciente</h3>
+<hr />
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-3 mb-3">
+        <label class="form-label">PACIENTE:</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          [ngModel]="patient.firstName + ' ' + patient.lastName"
+          readonly
+        />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">DNI:</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          [ngModel]="patient.documentNumber"
+          readonly
+        />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">FECHA NACIMIENTO:</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          [ngModel]="patient.birthdate | date: 'dd/MM/yyyy'"
+          readonly
+        />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">SEXO:</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          [ngModel]="patient.gender === 'M' ? 'Masculino' : 'Femenino'"
+          readonly
+        />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">DEPARTAMENTO:</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          [ngModel]="patient.location.department"
+          readonly
+        />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">PROVINCIA:</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          [ngModel]="patient.location.province"
+          readonly
+        />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">DISTRITO:</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          [ngModel]="patient.location.district"
+          readonly
+        />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">DIRECCIÓN:</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          [ngModel]="patient.location.address"
+          readonly
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h4>Historia Clinica</h4>
+      </div>
+      <div class="nav nav-tabs d-flex justify-content-between">
+        <button class="btn btn-primary btn-sm m-1" (click)="getPrevious()">
+          <i class="bi bi-arrow-left"></i>
+        </button>
+        <button class="btn btn-primary btn-sm m-1" (click)="getNext()">
+          <i class="bi bi-arrow-right"></i>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="text-end">
+              <span class="badge bg-secondary">{{ historyIndex + 1 }}</span>
+            </h4>
+            <h5 class="card-title fw-bold">
+              Fecha: {{ selectedHistory.date | date: "dd/MM/yyyy HH:mm" }}
+            </h5>
+            <hr />
+            <h5 class="card-title fw-bold">Examen Físico:</h5>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    placeholder="Altura..."
+                    [ngModel]="selectedHistory.height"
+                    readonly
+                  />
+                  <label>Altura (cm)</label>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    placeholder="Peso..."
+                    [ngModel]="selectedHistory.weight"
+                    readonly
+                  />
+                  <label>Peso (kg)</label>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    placeholder="Temperatura..."
+                    [ngModel]="selectedHistory.temperature"
+                    readonly
+                  />
+                  <label>Temp (C°)</label>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    placeholder="Presion..."
+                    [ngModel]="selectedHistory.pressure"
+                    readonly
+                  />
+                  <label>Presión (Pa)</label>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <h5 class="card-title fw-bold">Anamnesis:</h5>
+            <p class="card-text">
+              {{ selectedHistory.anamnesis }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h4>Antecedentes</h4>
+      </div>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <span class="nav-link" [ngClass]="{'active': antecedentType === 'EM'}" style="cursor: pointer;" (click)=" antecedentType='EM' ">Medicos</span>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link" [ngClass]="{'active': antecedentType === 'AF'}" style="cursor: pointer;" (click)=" antecedentType='AF' ">Familiares</span>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link" [ngClass]="{'active': antecedentType === 'IM'}" style="cursor: pointer;" (click)=" antecedentType='IM' ">Info. Medicamentos</span>
+        </li>
+      </ul>
+      <div class="card-body">
+        <ul class="list-group" *ngFor="let antecedent of antecedents">
+          <li class="list-group-item" *ngIf="antecedent.type === antecedentType"> {{ antecedent.detail }} </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

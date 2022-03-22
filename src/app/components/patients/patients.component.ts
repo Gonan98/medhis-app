@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Alert } from 'src/app/models/Alert';
 import { Patient } from 'src/app/models/Patient';
 import { PatientService } from 'src/app/services/patient.service';
 
@@ -10,18 +9,24 @@ import { PatientService } from 'src/app/services/patient.service';
 })
 export class PatientsComponent implements OnInit {
 
+  document = '';
   patient: Patient;
   patientList: Patient[];
-  alert: Alert;
 
   constructor(private patientService: PatientService) { 
     this.patient = new Patient();
-    this.alert = new Alert();
     this.patientList = [];
   }
 
   ngOnInit(): void {
     this.loadData();
+  }
+
+  onSearch() {
+    this.patientService.getPatientByDocument(this.document).subscribe(
+      data => this.patientList = [data],
+      err => alert(err.error.message)
+    );
   }
 
   onSubmit() {
