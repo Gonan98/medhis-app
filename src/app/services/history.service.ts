@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { History } from '../models/History';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { History } from '../models/History';
 })
 export class HistoryService {
 
-  private baseURL = 'http://localhost:5000/api/v1/histories';
+  private baseURL = `${environment.API_URL}/histories`;
 
   constructor(private http: HttpClient) { }
 

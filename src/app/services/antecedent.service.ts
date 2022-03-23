@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Antecedent } from '../models/Antecedent';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { Antecedent } from '../models/Antecedent';
 })
 export class AntecedentService {
 
-  private baseURL = 'http://localhost:5000/api/v1/antecedents';
+  private baseURL = `${environment.API_URL}/antecedents`;
 
   constructor(private http: HttpClient) { }
 
