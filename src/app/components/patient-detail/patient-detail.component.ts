@@ -34,7 +34,7 @@ export class PatientDetailComponent implements OnInit {
     this.histories = [];
     this.antecedents = [];
     this.historyIndex = 0;
-    this.antecedentType = 'EM'; //AM, AF, IM
+    this.antecedentType = 'EXAMENES' //AM, AF, IM
   }
 
   ngOnInit(): void {
@@ -58,7 +58,7 @@ export class PatientDetailComponent implements OnInit {
     this.historyService.getHistoriesByPatient(this.patientId).subscribe(
       data => {
         this.histories = data;
-        this.selectedHistory = this.histories[this.historyIndex];
+        if (this.histories.length > 0) this.selectedHistory = this.histories[this.historyIndex];
       },
       err => console.error(err)
     );
@@ -76,6 +76,10 @@ export class PatientDetailComponent implements OnInit {
       this.historyIndex--;
       this.selectedHistory = this.histories[this.historyIndex];
     }
+  }
+
+  clickTab(type:string) {
+    this.antecedentType = type;
   }
 
 }

@@ -1,6 +1,7 @@
 export class Antecedent {
     _id: string;
     type: string;
+    examinationDate?: string;
     detail: string;
     patient: string;
 

@@ -23,10 +23,20 @@
           name="type"
           [(ngModel)]="antecedent.type"
         >
-          <option value="EM">Examen Médico</option>
-          <option value="AF">Antecedentes Familiares</option>
-          <option value="IM">Información de Medicamentos</option>
+          <option value="EXAMENES">Examen Médico</option>
+          <option value="FAMILIARES">Antecedentes Familiares</option>
+          <option value="MEDICAMENTOS">Información de Medicamentos</option>
         </select>
+      </div>
+      <div class="mb-3" *ngIf="antecedent.type === 'EXAMENES'">
+        <label for="dateInput" class="form-label">Fecha del Examen:</label>
+        <input
+          type="date"
+          class="form-control"
+          name="examinationDate"
+          id="dateInput"
+          [(ngModel)]="antecedent.examinationDate"
+        />
       </div>
       <div class="mb-3">
         <label for="detailInput" class="form-label">Detalle:</label>
