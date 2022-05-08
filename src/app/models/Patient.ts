@@ -1,29 +1,21 @@
-import { Location } from "./Location";
-
 export class Patient {
-    _id: string;
+    id: number;
     firstName: string;
     lastName: string;
     documentNumber: string;
     birthdate: string;
     gender: string;
-    location: Location;
-    department: string;
-    province: string;
-    district: string;
     address: string;
+    ubigeoId: string;
 
     constructor() {
-        this._id = '';
+        this.id = 0;
         this.firstName = '';
         this.lastName = '';
         this.documentNumber = '';
         this.birthdate = '';
         this.gender = '';
-        this.department = '';
-        this.province = '';
-        this.district = '';
         this.address = '';
-        this.location = new Location();
+        this.ubigeoId = '';
     }
 }

@@ -12,10 +12,12 @@ export class HistoryComponent implements OnInit {
 
   history: History;
   documentNumber: string;
+  patientId: number;
 
   constructor(private historyService: HistoryService, private patientService: PatientService) {
     this.history = new History();
     this.documentNumber = '';
+    this.patientId = 0;
   }
 
   ngOnInit(): void {
@@ -24,18 +26,19 @@ export class HistoryComponent implements OnInit {
 
   onSubmit() {
     this.patientService.getPatientByDocument(this.documentNumber).subscribe(
-      (res) => this.addHistory(res._id),
-      console.error
+      (data) => {
+        this.history.patientId = data.id
+        this.saveHistory();
+      }
     );
+    this.history = new History();
   }
 
-  addHistory(patientId: string) {
-    this.history.patient = patientId;
+  saveHistory() {
     this.historyService.saveHistory(this.history).subscribe(
       console.log,
       console.error
     );
-    this.history = new History();
   }
 
 }

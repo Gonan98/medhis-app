@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Patient } from 'src/app/models/Patient';
+import { Department, District, Pronvice } from 'src/app/models/Ubigeo';
 import { PatientService } from 'src/app/services/patient.service';
+import { UbigeoService } from 'src/app/services/ubigeo.service';
 
 @Component({
   selector: 'app-patients',
@@ -12,14 +14,30 @@ export class PatientsComponent implements OnInit {
   document = '';
   patient: Patient;
   patientList: Patient[];
+  departments: Department[];
+  provinces: Pronvice[];
+  districts: District[];
+  departmentId: string;
+  provinceId: string;
+  districtId: string;
 
-  constructor(private patientService: PatientService) { 
+  constructor(
+    private patientService: PatientService,
+    private ubigeoService: UbigeoService
+  ) { 
     this.patient = new Patient();
     this.patientList = [];
+    this.departments = [];
+    this.provinces = [];
+    this.districts = [];
+    this.departmentId = '';
+    this.provinceId = '';
+    this.districtId = '';
   }
 
   ngOnInit(): void {
     this.loadData();
+    this.loadDeparments();
   }
 
   onSearch() {
@@ -35,11 +53,41 @@ export class PatientsComponent implements OnInit {
       (err) => console.error(err)
     );
     this.patient = new Patient();
+    this.departmentId = '';
+    this.provinceId = '';
+    this.districtId = '';
+  }
+
+  onSelectDepartment() {
+    this.ubigeoService.getProvincesByDepartment(this.departmentId).subscribe(
+      data => { 
+        this.provinces = data;
+      },
+      err => console.error(err)
+    );
+    this.districts = [];
+    this.provinceId = '';
+    this.districtId = '';
+  }
+
+  onSelectPronvice() {
+    this.ubigeoService.getDistrictsByProvince(this.provinceId).subscribe(
+      data => { this.districts = data },
+      err => console.error(err)
+    );
+    this.districtId = '';
   }
 
   loadData() {
     this.patientService.getAllPatients().subscribe(
       (data) => { this.patientList = data },
+      (err) => console.error(err)
+    );
+  }
+
+  loadDeparments() {
+    this.ubigeoService.getDepartments().subscribe(
+      (data) => { this.departments = data },
       (err) => console.error(err)
     );
   }

@@ -1,14 +1,22 @@
 export class Antecedent {
-    _id: string;
-    type: string;
-    examinationDate?: string;
+    id: number;
     detail: string;
-    patient: string;
+    issuDate?: string;
+    antecedentTypeId: number;
 
     constructor() {
-        this._id = '';
-        this.type = '';
+        this.id = 0;
         this.detail = '';
-        this.patient = '';
+        this.antecedentTypeId = 0;
+    }
+}
+
+export class AntecedentType {
+    id: number;
+    name: string;
+
+    constructor() {
+        this.id = 0;
+        this.name = '';
     }
 }

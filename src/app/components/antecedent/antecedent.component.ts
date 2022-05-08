@@ -26,20 +26,20 @@ export class AntecedentComponent implements OnInit {
   }
 
   onSubmit() {
-    this.patientService.getPatientByDocument(this.documentNumber).subscribe(
-      res => this.addAntecedent(res._id),
-      console.error
-     );
+    // this.patientService.getPatientByDocument(this.documentNumber).subscribe(
+    //   res => this.addAntecedent(res._id),
+    //   console.error
+    //  );
   }
 
   addAntecedent(patientId: string) {
-    this.antecedent.patient = patientId;
-    console.log(this.antecedent)
-    this.antecedentService.saveAntecedent(this.antecedent).subscribe(
-      console.log,
-      console.error
-    );
-    this.antecedent = new Antecedent();
+    // this.antecedent.patient = patientId;
+    // console.log(this.antecedent)
+    // this.antecedentService.saveAntecedent(this.antecedent).subscribe(
+    //   console.log,
+    //   console.error
+    // );
+    // this.antecedent = new Antecedent();
   }
 
 }

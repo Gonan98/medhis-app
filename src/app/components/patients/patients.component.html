@@ -29,6 +29,7 @@
             id="documentNumber"
             name="documentNumber"
             class="form-control"
+            maxlength="8"
             [(ngModel)]="patient.documentNumber"
           />
         </div>
@@ -54,35 +55,23 @@
             <option value="F">Femenino</option>
           </select>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-12">
           <label for="department" class="form-label">Departamento:</label>
-          <input
-            type="text"
-            id="department"
-            name="department"
-            class="form-control"
-            [(ngModel)]="patient.department"
-          />
+          <select class="form-select" name="department" [(ngModel)]="departmentId" (change)="onSelectDepartment()">
+            <option *ngFor="let department of departments" [value]="department.id">{{department.name}}</option>
+          </select>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-12">
           <label for="province" class="form-label">Provincia</label>
-          <input
-            type="text"
-            id="province"
-            name="province"
-            class="form-control"
-            [(ngModel)]="patient.province"
-          />
+          <select class="form-select" name="province" [(ngModel)]="provinceId" (change)="onSelectPronvice()" [disabled]="!departmentId">
+            <option *ngFor="let province of provinces" [value]="province.id">{{province.name}}</option>
+          </select>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-12">
           <label for="district" class="form-label">Distrito</label>
-          <input
-            type="text"
-            id="district"
-            name="district"
-            class="form-control"
-            [(ngModel)]="patient.district"
-          />
+          <select class="form-select" name="district" [(ngModel)]="patient.ubigeoId" [disabled]="!provinceId">
+            <option *ngFor="let district of districts" [value]="district.id">{{district.name}}</option>
+          </select>
         </div>
         <div class="col">
           <label for="address" class="form-label">Dirección:</label>
@@ -120,6 +109,8 @@
           <th scope="col">Nombres</th>
           <th scope="col">Apellidos</th>
           <th scope="col">N° de Documento</th>
+          <th scope="col">Historia</th>
+          <th scope="col">Antecedente</th>
           <th scope="col">Detalle</th>
         </tr>
       </thead>
@@ -129,12 +120,20 @@
           <td>{{ patient.lastName }}</td>
           <td>{{ patient.documentNumber }}</td>
           <td>
-            <a [routerLink]="['/paciente', patient._id]"
-              ><i class="bi bi-file-text-fill"></i
-            ></a>
+            <button class="btn btn-small btn-primary" data-bs-toggle="modal" data-bs-target="#historyModal"><i class="bi bi-plus-circle"></i></button>
+          </td>
+          <td>
+            <button class="btn btn-small btn-primary"><i class="bi bi-plus-circle"></i></button>
+          </td>
+          <td>
+            <a class="btn btn-small btn-dark" [routerLink]="['/paciente', patient.id]"
+              ><i class="bi bi-file-text"></i>
+            </a>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+<app-history></app-history>

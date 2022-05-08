@@ -18,6 +18,6 @@ export class HistoryService {
   }
 
   getHistoriesByPatient(patientId: string): Observable<any> {
-    return this.http.get(`${this.baseURL}?patient=${patientId}`);
+    return this.http.get(`${this.baseURL}?patientId=${patientId}`);
   }
 }

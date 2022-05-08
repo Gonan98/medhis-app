@@ -9,7 +9,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AntecedentComponent } from './components/antecedent/antecedent.component';
 import { PatientDetailComponent } from './components/patient-detail/patient-detail.component';
-import { InfoMessageComponent } from './components/info-message/info-message.component';
 
 @NgModule({
   declarations: [
@@ -17,8 +16,7 @@ import { InfoMessageComponent } from './components/info-message/info-message.com
     PatientsComponent,
     HistoryComponent,
     AntecedentComponent,
-    PatientDetailComponent,
-    InfoMessageComponent
+    PatientDetailComponent
   ],
   imports: [
     BrowserModule,
