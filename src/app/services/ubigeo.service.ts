@@ -17,10 +17,10 @@ export class UbigeoService {
   }
 
   getProvincesByDepartment(deparmentId: string): Observable<any> {
-    return this.http.get(`${this.baseURL}/provinces?departmentId=${deparmentId}`)
+    return this.http.get(`${this.baseURL}/departments/${deparmentId}/provinces`)
   }
 
   getDistrictsByProvince(provinceId: string): Observable<any> {
-    return this.http.get(`${this.baseURL}/districts?provinceId=${provinceId}`);
+    return this.http.get(`${this.baseURL}/provinces/${provinceId}/districts`);
   }
 }
